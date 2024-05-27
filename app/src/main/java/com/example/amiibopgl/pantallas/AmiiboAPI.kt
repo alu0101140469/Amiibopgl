@@ -152,7 +152,9 @@ fun AmiiboAPI(navController: NavController) {
                             containerColor = Color.LightGray
                         ),
                         content = {
-                            Column(Modifier.verticalScroll(rememberScrollState())) {
+                            Column(Modifier
+                                .verticalScroll(rememberScrollState())
+                            ) {
                                 listaGameSeries?.amiibo?.distinctBy { it.name }
                                     ?.let { amiibos ->
                                         val filteredAmiibos =
@@ -170,7 +172,8 @@ fun AmiiboAPI(navController: NavController) {
                                                 ListItem(
                                                     headlineContent = {
                                                         Text(
-                                                            gameSeries.name ?: ""
+                                                            gameSeries.name ?: "",
+                                                            color = Color.Black
                                                         )
                                                     },
                                                     modifier = Modifier
