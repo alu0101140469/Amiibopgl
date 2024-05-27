@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "601184984768",
+    "project_id": "amiiboapi-732cc",
+    "storage_bucket": "amiiboapi-732cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601184984768:android:10ffeb101076c644381725",
+        "android_client_info": {
+          "package_name": "com.example.amiibopgl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9QD5Tpsujgp3VoHyJ1I2OfOhHxhEyroA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601184984768:android:3cc179b9715dca61381725",
+        "android_client_info": {
+          "package_name": "com.mycompany.amiibopgl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9QD5Tpsujgp3VoHyJ1I2OfOhHxhEyroA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

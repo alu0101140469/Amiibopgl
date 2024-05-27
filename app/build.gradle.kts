@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.example.amiibopgl"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.amiibopgl"
@@ -50,16 +51,17 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
-    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("io.coil-kt:coil-compose:1.4.0")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.media3:media3-ui:1.3.1")
-    implementation("androidx.media3:media3-exoplayer:1.3.1")
+    implementation("androidx.compose.material3:material3:1.1.1")
+    implementation("androidx.navigation:navigation-runtime-ktx:2.7.7")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -67,7 +69,25 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.media3:media3-exoplayer: 1.3.1")
-    implementation("androidx.media3:media3-ui: 1.3.1")
+    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation (platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation ("com.google.android.material:material:1.11.0")
+    //media exoplayer
+    val media3_version = "1.2.1"
+    implementation("androidx.media3:media3-exoplayer:$media3_version")
+    implementation("androidx.media3:media3-ui:$media3_version")
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-perf")
+    implementation ("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.10.1")
+    implementation ("com.google.firebase:firebase-auth:")
+    implementation ("com.google.firebase:firebase-firestore:")
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.google.accompanist:accompanist-pager:0.20.0")
+    // coil
+    implementation("io.coil-kt:coil-compose:2.6.0")
 }
