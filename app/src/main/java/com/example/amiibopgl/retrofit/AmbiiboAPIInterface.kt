@@ -24,7 +24,7 @@ object AmiiboApi {
 
 interface AmbiiboAPIInterface {
     @GET("amiibo/")
-    suspend fun getAmiibos(@Query("gameseries") gameSeries : String?): Response<AmiiboRoot>
+    suspend fun getAmiibos(@Query("gameseries") gameSeries: String?): Response<AmiiboRoot>
 
     @GET("gameseries")
     suspend fun getGameSeries(): Response<GameSeriesRoot>
