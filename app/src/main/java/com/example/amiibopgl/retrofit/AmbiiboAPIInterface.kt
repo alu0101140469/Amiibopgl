@@ -1,7 +1,7 @@
 package com.example.amiibopgl.retrofit
 
-import com.example.amiibopgl.model.Raiz
-import com.example.amiibopgl.model.RaizGS
+import com.example.amiibopgl.model.AmiiboRoot
+import com.example.amiibopgl.model.GameSeriesRoot
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,10 +24,10 @@ object AmiiboApi {
 
 interface AmbiiboAPIInterface {
     @GET("amiibo/")
-    suspend fun getAmiibos(@Query("gameseries") gameSeries : String?): Response<Raiz>
+    suspend fun getAmiibos(@Query("gameseries") gameSeries : String?): Response<AmiiboRoot>
 
     @GET("gameseries")
-    suspend fun getGameSeries(): Response<RaizGS>
+    suspend fun getGameSeries(): Response<GameSeriesRoot>
 }
 
 

@@ -43,8 +43,10 @@ fun Principal(navController: NavController) {
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            DrawerContent(navController, drawerState, scope, auth, context, selectedItem) {
-                selectedItem = it
+            Box(modifier = Modifier.width(250.dp)) {
+                DrawerContent(navController, drawerState, scope, auth, context, selectedItem) {
+                    selectedItem = it
+                }
             }
         }
     ) {
@@ -109,11 +111,10 @@ fun Principal(navController: NavController) {
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(horizontal = 20.dp)
+                                .align(Alignment.TopCenter)
+                                .padding(horizontal = 40.dp)
                         )
                     }
-                    // Overlay text at the bottom
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -126,8 +127,8 @@ fun Principal(navController: NavController) {
                             color = Color.White,
                             textAlign = TextAlign.Center,
                             modifier = Modifier
-                                .align(Alignment.Center)
-                                .padding(horizontal = 20.dp)
+                                .align(Alignment.BottomCenter)
+                                .padding(horizontal = 40.dp)
                         )
                     }
                 }
@@ -150,11 +151,12 @@ fun DrawerContent(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(top = 48.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         DrawerHeader()
+        Spacer(Modifier.height(24.dp))
         DrawerItem(label = "Principal", selected = selectedItem == "Principal", onClick = {
             onItemSelected("Principal")
             scope.launch { drawerState.close() }
@@ -196,7 +198,7 @@ fun DrawerHeader() {
 
 @Composable
 fun DrawerItem(label: String, selected: Boolean, onClick: () -> Unit) {
-    val backgroundColor = if (selected) Color(0xFF8B4513) else Color.Transparent // Marrón si está seleccionado
+    val backgroundColor = if (selected) Color(0xFF8B4513) else Color.Transparent
     val contentColor = if (selected) Color.White else MaterialTheme.colorScheme.onSurface
 
     Text(
@@ -206,7 +208,7 @@ fun DrawerItem(label: String, selected: Boolean, onClick: () -> Unit) {
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .padding(16.dp)
-            .background(color = backgroundColor, shape = RoundedCornerShape(8.dp)), // Fondo marrón y redondeado si está seleccionado
+            .background(color = backgroundColor, shape = RoundedCornerShape(8.dp)),
         style = MaterialTheme.typography.bodyLarge
     )
 }

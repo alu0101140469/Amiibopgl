@@ -1,11 +1,14 @@
 package com.example.amiibopgl.pantallas
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +33,8 @@ import com.example.amiibopgl.R
 @Composable
 fun Inicio(navController: NavController) {
     val context = LocalContext.current
+    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
+
     val exoPlayer = remember {
         ExoPlayer.Builder(context).build().apply {
             playWhenReady = true
@@ -42,6 +47,18 @@ fun Inicio(navController: NavController) {
     val mediaItem = MediaItem.fromUri(uri)
     exoPlayer.setMediaItem(mediaItem)
     exoPlayer.prepare()
+
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.stop()
+            exoPlayer.release()
+        }
+    }
+
+    BackHandler {
+        exoPlayer.stop()
+        onBackPressedDispatcher?.onBackPressed()
+    }
 
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
@@ -63,7 +80,10 @@ fun Inicio(navController: NavController) {
                     )
                 },
                 actions = {
-                    IconButton(onClick = { navController.navigate("InicioSesion") }) {
+                    IconButton(onClick = {
+                        exoPlayer.stop()
+                        navController.navigate("InicioSesion")
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.AccountCircle,
                             contentDescription = "Perfil de usuario"
@@ -83,7 +103,10 @@ fun Inicio(navController: NavController) {
                     }
                 })
                 Button(
-                    onClick = { navController.navigate("Principal") },
+                    onClick = {
+                        exoPlayer.stop()
+                        navController.navigate("Registro")
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF8B4513),
                         contentColor = Color.White

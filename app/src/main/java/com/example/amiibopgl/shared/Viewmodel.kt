@@ -2,8 +2,8 @@ package com.example.amiibopgl.shared
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.amiibopgl.model.Raiz
-import com.example.amiibopgl.model.RaizGS
+import com.example.amiibopgl.model.AmiiboRoot
+import com.example.amiibopgl.model.GameSeriesRoot
 import com.example.amiibopgl.retrofit.AmiiboApi.retrofitService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,11 +15,11 @@ enum class estadoApi{
 
 class ViewModelRetrofit : ViewModel() {
 
-    private val _listaAmiibos : MutableStateFlow<Raiz?> = MutableStateFlow(null)
+    private val _listaAmiibos : MutableStateFlow<AmiiboRoot?> = MutableStateFlow(null)
     var listaAmiibos = _listaAmiibos.asStateFlow()
 
 
-    private val _listaGS : MutableStateFlow<RaizGS?> = MutableStateFlow(null)
+    private val _listaGS : MutableStateFlow<GameSeriesRoot?> = MutableStateFlow(null)
     var listaGS = _listaGS.asStateFlow()
 
     private val _estadoLlamada : MutableStateFlow<estadoApi> = MutableStateFlow(estadoApi.IDLE)
@@ -36,11 +36,11 @@ class ViewModelRetrofit : ViewModel() {
     fun actualizarActivo(b : Boolean) {_activo.value = b}
 
     init {
-        obtenerAmiibos()
-        obtenerGS()
+        getAmiibos()
+        getGameSeries()
     }
 
-    fun obtenerAmiibos(){
+    fun getAmiibos(){
         _estadoLlamada.value = estadoApi.LOADING
         viewModelScope.launch {
             var respuesta = retrofitService.getAmiibos(null)
@@ -50,13 +50,10 @@ class ViewModelRetrofit : ViewModel() {
                 println(respuesta.body().toString())
             }
             else println("Ha habido algún error " + respuesta.errorBody())
-
-
-
         }
     }
 
-    fun obtenerGS(){
+    fun getGameSeries(){
         _estadoLlamada.value = estadoApi.LOADING
         viewModelScope.launch {
             var respuesta = retrofitService.getGameSeries()
@@ -64,11 +61,10 @@ class ViewModelRetrofit : ViewModel() {
                 _listaGS.value = respuesta.body()
             }
             else println("Ha habido algún error " + respuesta.errorBody())
-            //_estadoLlamada.value = estadoApi.SUCCESS
         }
     }
 
-    fun buscarAmiibos(){
+    fun searchAmiibos(){
         _estadoLlamada.value = estadoApi.LOADING
         println("Buscando amiibos de la serie ${_textoBusqueda.value}")
         viewModelScope.launch {
@@ -79,7 +75,6 @@ class ViewModelRetrofit : ViewModel() {
                 _estadoLlamada.value = estadoApi.SUCCESS
             }
             else println("Ha habido algún error " + respuesta.errorBody())
-
         }
     }
 }

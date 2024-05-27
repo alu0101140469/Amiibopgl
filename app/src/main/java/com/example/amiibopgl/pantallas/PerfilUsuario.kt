@@ -1,13 +1,9 @@
 package com.example.amiibopgl.pantallas
 
 import android.annotation.SuppressLint
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
@@ -26,13 +22,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.amiibopgl.R
+import com.google.firebase.auth.FirebaseAuth
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PerfilUsuario(navController: NavController) {
-    var correo by remember { mutableStateOf("usuario@example.com") }
-    var contraseña by remember { mutableStateOf("********") }
+    val usuario = FirebaseAuth.getInstance().currentUser
+
+    var correo by remember(usuario) { mutableStateOf(usuario?.email ?: "No disponible") }
+    var password by remember { mutableStateOf("********") }
 
     Scaffold(
         topBar = {
@@ -68,7 +67,7 @@ fun PerfilUsuario(navController: NavController) {
                         Spacer(modifier = Modifier.height(50.dp))
                         ProfileImage()
                         Spacer(modifier = Modifier.height(16.dp))
-                        ProfileInfo(correo = correo, contraseña = contraseña)
+                        ProfileInfo(correo = correo, contraseña = password)
                     }
                     Image(
                         painter = painterResource(id = R.drawable.grupoamiibos),
@@ -84,6 +83,7 @@ fun PerfilUsuario(navController: NavController) {
         }
     )
 }
+
 
 @Composable
 fun ProfileImage() {

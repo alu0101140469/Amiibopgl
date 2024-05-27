@@ -5,6 +5,6 @@ class GameSeries {
     var name: String? = null
 }
 
-class RaizGS {
+class GameSeriesRoot {
     var amiibo: ArrayList<GameSeries>? = null
 }
